@@ -54,6 +54,7 @@ Direct GPIO wiring (no switch matrix)
 
 The PCB was designed in KiCad with direct GPIO wiring and minimal components.
 ![PCB](https://github.com/user-attachments/assets/a3ca02c6-11b9-46eb-af41-8a2cc5480799)
+
 ⌨️Default keymap
 
 Key 1: Discord mute / unmute
