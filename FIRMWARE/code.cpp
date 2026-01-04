@@ -13,20 +13,34 @@ Adafruit_SSD1306 display(128, 32, &Wire, OLED_RESET);
 #define SW_VOLU 28
 #define SW_VOLD 29
 
-// ---------------- VARIABLES ----------------
+// ---------------- SETTINGS ----------------
+#define DEBOUNCE_DELAY 200
+
+// ---------------- STATE ----------------
 int volume = 50;
-unsigned long lastUpdate = 0;
+unsigned long lastOLED = 0;
+unsigned long lastPress[4] = {0, 0, 0, 0};
 
 // ---------------- FUNCTIONS ----------------
 void sendDiscordKey(uint8_t key) {
   Keyboard.press(KEY_LEFT_CTRL);
-  Keyboard.press(KEY_LEFT_ALT);
   Keyboard.press(KEY_LEFT_SHIFT);
   Keyboard.press(key);
   delay(40);
   Keyboard.releaseAll();
 }
 
+bool pressed(uint8_t pin, uint8_t index) {
+  if (!digitalRead(pin)) {
+    if (millis() - lastPress[index] > DEBOUNCE_DELAY) {
+      lastPress[index] = millis();
+      return true;
+    }
+  }
+  return false;
+}
+
+// ---------------- SETUP ----------------
 void setup() {
   pinMode(SW_MUTE, INPUT_PULLUP);
   pinMode(SW_CAM, INPUT_PULLUP);
@@ -37,35 +51,39 @@ void setup() {
   Consumer.begin();
 
   Wire.begin(6, 7); // SDA, SCL
+
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.display();
 }
 
+// ---------------- LOOP ----------------
 void loop() {
-  if (!digitalRead(SW_MUTE)) {
-    sendDiscordKey(KEY_F13);
-    delay(300);
+
+  // Discord mute (CTRL + SHIFT + M)
+  if (pressed(SW_MUTE, 0)) {
+    sendDiscordKey(KEY_M);
   }
 
-  if (!digitalRead(SW_CAM)) {
-    sendDiscordKey(KEY_F14);
-    delay(300);
+  // Discord video (CTRL + SHIFT + V)
+  if (pressed(SW_CAM, 1)) {
+    sendDiscordKey(KEY_V);
   }
 
-  if (!digitalRead(SW_VOLU)) {
+  // Volume up
+  if (pressed(SW_VOLU, 2)) {
     Consumer.write(MEDIA_VOLUME_UP);
     volume = min(volume + 2, 100);
-    delay(200);
   }
 
-  if (!digitalRead(SW_VOLD)) {
+  // Volume down
+  if (pressed(SW_VOLD, 3)) {
     Consumer.write(MEDIA_VOLUME_DOWN);
     volume = max(volume - 2, 0);
-    delay(200);
   }
 
-  if (millis() - lastUpdate > 200) {
+  // OLED refresh
+  if (millis() - lastOLED > 200) {
     display.clearDisplay();
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
@@ -84,6 +102,6 @@ void loop() {
     display.print("s");
 
     display.display();
-    lastUpdate = millis();
+    lastOLED = millis();
   }
 }
