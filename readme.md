@@ -1,4 +1,5 @@
 🎛️ USB-C Macropad
+
 What is this
 
 Basically, I wanted a small macropad for Discord controls and media volume, with a little screen for feedback. It’s a 4-key USB-C macropad built around the Seeed XIAO RP2040, with a 128×32 OLED display on top.
