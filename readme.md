@@ -165,4 +165,5 @@ This project was built as a learning exercise and reference design for anyone in
 ![BOTTOM](https://github.com/user-attachments/assets/ed747043-4215-4b27-a74c-90187678c82d)
 ![TOP](https://github.com/user-attachments/assets/b3c34520-6380-46e9-8a5e-9df1e8433c83)
 ![SCHEME](https://github.com/user-attachments/assets/9be39e64-921a-45e5-8bd8-e946ed8b6572)
+![3DPCB](https://github.com/user-attachments/assets/3a550542-ab8c-487d-900b-abba15ac760f)
 
