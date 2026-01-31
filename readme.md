@@ -1,17 +1,15 @@
-# 🎛️ USB-C Macropad
+# USB-C Macropad
 
-This is a 4-key USB-C macropad built around the Seeed XIAO RP2040, with a 128×32 OLED display on top.
-The idea was to keep it simple and beginner-friendly — no key matrix, no drivers, no complicated firmware. Just plug it in and it works as a USB HID device.
+This is a device, that will help you with everyday tasks that needs switching tabs or using shortcuts to get to them. It is very easy to use and you can customize their use by your preferences.
 
 ---
-# 🧩 PCB & Schematic
+# PCB & Schematic
 
-The PCB was designed in KiCad with direct GPIO wiring and minimal components.
+The PCB was designed in KiCad.
 ![PCB](https://github.com/user-attachments/assets/a3ca02c6-11b9-46eb-af41-8a2cc5480799)
 
 ---
-# ⌨️Default keymap
-
+# Default keymap (My idea was to use it with Discord)
 Key 1: Discord mute / unmute
 
 Key 2: Discord camera on / off
@@ -24,11 +22,10 @@ Key 4: Volume down
 # 💾 Firmware
 
 Platform: Arduino (RP2040 core)
-USB Mode: Composite HID
-Programming
-This macropad runs CircuitPython and acts as a USB HID device (keyboard + media keys).
-To change behavior, just edit code.py on the CIRCUITPY drive and save — the board restarts automatically.
-No compiling, no flashing tools.
+USB Mode: Acts as a keyboard
+Programming:
+This macropad runs CircuitPython and acts as a USB HID device so it can input keys like a real keyboard.
+To change hotkeys, just edit the code. It uses basic drivers so you dont need to install anything.
 
 
 # 📦 BOM – Bill of Materials
@@ -43,11 +40,11 @@ No compiling, no flashing tools.
 | 1× | Case | 3D-printed case through Fusion |
 
 
-All the project files are included:
+All the project files are in these repositories:
 /pcb – KiCad PCB and schematic
 /firmware – Arduino source code
 /cad – Case files (optional)
-Order the PCB, solder the components, flash the firmware to the XIAO, plug it in, and you’re good to go.
+Order the PCB, upload the code, 3D print the case and connect everything into one piece and you have a working MACROPAD.
 
 📸 Gallery
 
